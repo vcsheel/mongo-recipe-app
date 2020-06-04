@@ -6,6 +6,9 @@ import com.learn.spring.mongorecipeapp.repositories.CategoryRepository;
 import com.learn.spring.mongorecipeapp.repositories.RecipeRepository;
 import com.learn.spring.mongorecipeapp.repositories.UnitOfMeasureRepository;
 
+import com.learn.spring.mongorecipeapp.repositories.reactive.CategoryReactiveRepository;
+import com.learn.spring.mongorecipeapp.repositories.reactive.RecipeReactiveRepository;
+import com.learn.spring.mongorecipeapp.repositories.reactive.UnitOfMeasureReactiveRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;

@@ -2,6 +2,9 @@ package com.learn.spring.mongorecipeapp.repositories;
 
 import com.learn.spring.mongorecipeapp.bootstrap.RecipeBootstrap;
 import com.learn.spring.mongorecipeapp.models.UnitOfMeasure;
+import com.learn.spring.mongorecipeapp.repositories.reactive.CategoryReactiveRepository;
+import com.learn.spring.mongorecipeapp.repositories.reactive.RecipeReactiveRepository;
+import com.learn.spring.mongorecipeapp.repositories.reactive.UnitOfMeasureReactiveRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
