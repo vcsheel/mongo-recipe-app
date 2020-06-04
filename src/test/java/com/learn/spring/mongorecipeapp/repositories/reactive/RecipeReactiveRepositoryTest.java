@@ -19,6 +19,7 @@ public class RecipeReactiveRepositoryTest {
 
     @Before
     public void setUp() throws Exception {
+        recipeReactiveRepository.deleteAll().block();
     }
 
     @Test
