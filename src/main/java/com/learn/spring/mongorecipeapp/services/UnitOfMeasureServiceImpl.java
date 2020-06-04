@@ -1,31 +1,35 @@
 package com.learn.spring.mongorecipeapp.services;
 
 import com.learn.spring.mongorecipeapp.commands.UnitOfMeasureCommand;
-import com.learn.spring.mongorecipeapp.repositories.UnitOfMeasureRepository;
 import com.learn.spring.mongorecipeapp.converters.UnitOfMeasureToUnitOfMeasureCommand;
+import com.learn.spring.mongorecipeapp.repositories.reactive.UnitOfMeasureReactiveRepository;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
 
-    private final UnitOfMeasureRepository unitOfMeasureRepository;
+    private final UnitOfMeasureReactiveRepository unitOfMeasureReactiveRepository;
     private final UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureToUnitOfMeasureCommand;
 
-    public UnitOfMeasureServiceImpl(UnitOfMeasureRepository unitOfMeasureRepository, UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureToUnitOfMeasureCommand) {
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
+    public UnitOfMeasureServiceImpl(UnitOfMeasureReactiveRepository unitOfMeasureReactiveRepository, UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureToUnitOfMeasureCommand) {
+        this.unitOfMeasureReactiveRepository = unitOfMeasureReactiveRepository;
         this.unitOfMeasureToUnitOfMeasureCommand = unitOfMeasureToUnitOfMeasureCommand;
     }
 
     @Override
-    public Set<UnitOfMeasureCommand> listAllUoms() {
+    public Flux<UnitOfMeasureCommand> listAllUoms() {
 
-        return StreamSupport.stream(unitOfMeasureRepository.findAll()
-                .spliterator(), false)
-                .map(unitOfMeasureToUnitOfMeasureCommand::convert)
-                .collect(Collectors.toSet());
+        return unitOfMeasureReactiveRepository
+                .findAll()
+                .map(unitOfMeasureToUnitOfMeasureCommand::convert);
+
+
+//        return StreamSupport.stream(unitOfMeasureRepository.findAll()
+//                .spliterator(), false)
+//                .map(unitOfMeasureToUnitOfMeasureCommand::convert)
+//                .collect(Collectors.toSet());
+
     }
 }
