@@ -50,7 +50,7 @@
                             <tr th:each="ing : ${recipe.ingredients}">
                                 <td th:text="${ing.id}">123</td>
                                 <td th:text="${ing.amount} + ' ' + ${ing.uom.description} + ' ' + ${ing.description}">Tasty Goodnees</td>
-                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ing.id} + '/view'}">View</a></td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ing.id} + '/show'}">View</a></td>
                                 <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ing.id} + '/update'}">Update</a></td>
                                 <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ing.id} + '/delete'}">Delete</a></td>
                             </tr>
