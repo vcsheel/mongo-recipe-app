@@ -38,28 +38,22 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Mono<Recipe> findById(String id) {
-
-        Recipe recipe = recipeRepository.findById(id).block();
-
-        if (recipe == null) {
-            throw new NotFoundException("Recipe Not Found. For ID value: " + id );
-        }
-
-        return Mono.just(recipe);
+        return recipeRepository.findById(id);
     }
 
     @Override
     public Mono<RecipeCommand> findCommandById(String id) {
-        RecipeCommand recipeCommand = recipeToRecipeCommand.convert(findById(id).block());
 
-        //enhance command object with id value
-        if(recipeCommand.getIngredients() != null && recipeCommand.getIngredients().size() > 0){
-            recipeCommand.getIngredients().forEach(rc -> {
-                rc.setRecipeId(recipeCommand.getId());
-            });
-        }
+        return recipeRepository.findById(id)
+                .map(recipe -> {
+                    RecipeCommand recipeCommand = recipeToRecipeCommand.convert(recipe);
 
-        return Mono.just(recipeCommand);
+                    recipeCommand.getIngredients().forEach(rc -> {
+                        rc.setRecipeId(recipeCommand.getId());
+                    });
+
+                    return recipeCommand;
+                });
     }
 
     @Override
