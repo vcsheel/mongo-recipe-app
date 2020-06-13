@@ -42,7 +42,7 @@ public class RecipeController {
     @GetMapping("recipe/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model){
         log.debug("Inside show update form");
-        model.addAttribute("recipe", recipeService.findCommandById(id).block());
+        model.addAttribute("recipe", recipeService.findCommandById(id));
         log.debug("after model add");
         return RECIPE_RECIPEFORM_URL;
     }
